@@ -8,21 +8,31 @@ function main() {
 	    let greeting;
 	    let personName;
 
-	    setTimeout(() => {
-	        let greetings = ['Hello', 'Hola', 'Konnichiwa', 'Bonjour', 'Hallo'];
-	        let randomIndex = Math.floor(Math.random() * greetings.length);
-	        greeting = greetings[randomIndex];
+	    function first(next) {
+	    	setTimeout(() => {
+		        let greetings = ['Hello', 'Hola', 'Konnichiwa', 'Bonjour', 'Hallo'];
+		        let randomIndex = Math.floor(Math.random() * greetings.length);
+		        greeting = greetings[randomIndex];
+		        next();
+		    }, timeOne);
+	    }
 
+	    function second(next) {
 		    setTimeout(() => {
 		        let names = ['Alice', 'Bob', 'Carol', 'Devon'];
 		        let randomIndex = Math.floor(Math.random() * names.length);
 		        personName = names[randomIndex];
-		    
-		    	console.log(greeting + ', ' + personName + '!');
-		    	document.getElementById('callback').textContent = greeting + ', ' + personName + '!';
+		    	next();
 		    }, timeTwo);
+	    }
 
-	    }, timeOne);
+	    function last() {
+		   	console.log(greeting + ', ' + personName + '!');
+			document.getElementById('callback').textContent = greeting + ', ' + personName + '!';
+	    }
+
+	    first(() => second(last));
+
 
 	});
 }
