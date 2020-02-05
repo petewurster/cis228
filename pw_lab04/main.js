@@ -22,12 +22,8 @@ function postMessage() {
 	xMit.body = JSON.stringify(getState());
 
 	fetch(API_ROOT_URL, xMit)
-		.then((reply) => {
-			return reply.json();
-		})
-		.then((json) => {
-			pullMessage(json.id, displayPost);
-		});
+		.then((reply) => reply.json())
+		.then((json) => pullMessage(json.id, displayPost));
 }
 
 function pullMessage(messageId, callbackJustBecause) {
@@ -36,12 +32,8 @@ function pullMessage(messageId, callbackJustBecause) {
 	let address = API_ROOT_URL + `/${getState().jnum}/${messageId}`;
 
 	fetch(address, xMit)
-		.then((reply) => {
-			return reply.json();
-		})
-		.then((json) => {
-			callbackJustBecause(json);
-		});
+		.then((reply) => reply.json())
+		.then((json) => callbackJustBecause(json));
 }
 
 function getState() {
