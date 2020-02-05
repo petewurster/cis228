@@ -4,36 +4,39 @@ document.addEventListener('DOMContentLoaded', main);
 
 const API_ROOT_URL = 'https://messenger.ccp-lessons.com/message';
 
-const displayPost = (data) => {
-	document.getElementById('id').textContent = `post #${data.id}`;
-	document.getElementById('message').textContent = `${data.message}`;
-	document.getElementById('user').textContent = `--${data.jnum}`;
+const updatePage = (json) => {
+	document.getElementById('id').textContent = `post #${json.id}`;
+	document.getElementById('message').textContent = `${json.message}`;
+	document.getElementById('user').textContent = `--${json.jnum}`;
 }
 
-let xMit = {
-	headers: {
-		'Content-Type': 'application/json'
-	}
-};
-
-function postMessage() {
-	xMit.method = "POST";
-	xMit.body = JSON.stringify(getState());
+function bounceMessage() {
+	//prepare xMit for POST
+	let xMit = {
+		headers: {
+			'Content-Type': 'application/json',
+			'Accept': 'application/json, text/html, text/plain'
+		},
+		method:  "POST",
+		body: JSON.stringify(getState())
+	};
+	
+	//clear textArea
 	document.getElementById('messageText').value = '';
 
+	//send POST
 	fetch(API_ROOT_URL, xMit)
 		.then((reply) => reply.json())
-		.then((json) => pullMessage(getState().jnum, json.id, displayPost));
-}
-
-function pullMessage(jnum, messageId, callbackJustBecause) {
-	xMit.method = "GET";
-	xMit.body = null;
-	let address = API_ROOT_URL + `/${jnum}/${messageId}`;
-
-	fetch(address, xMit)
+		.then((json) => {
+			//alter xMit for GET
+			xMit.method = "GET";
+			xMit.body = null;
+			let address = API_ROOT_URL + `/${getState().jnum}/${json.id}`;
+			//send GET
+			return fetch(address, xMit);
+		})
 		.then((reply) => reply.json())
-		.then((json) => callbackJustBecause(json));
+		.then((json) => updatePage(json));
 }
 
 function getState() {
@@ -44,5 +47,5 @@ function getState() {
 }
 
 function main() {
-	document.getElementById('post').addEventListener('click', postMessage);
+	document.getElementById('post').addEventListener('click', bounceMessage);
 }
