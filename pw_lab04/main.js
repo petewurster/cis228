@@ -36,7 +36,7 @@ function bounceMessage() {
 			return fetch(address, xMit);
 		})
 		.then((reply) => reply.json())
-		.then((json) => updatePage(json));
+		.then(updatePage);
 }
 
 function getState() {
