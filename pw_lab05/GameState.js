@@ -1,8 +1,9 @@
 'use strict';
-
+import {Location} from './Location.js';
 const URL_ROOT = 'https://petewurster.com/lab05';
 
 class GameState {
+
 	constructor(locations) {
 		this.locations = locations;
 		this.winConditionMet = false;
@@ -12,11 +13,7 @@ class GameState {
 		return fetch(`${URL_ROOT}/locations.JSON`)
 		.then((resp) => resp.json())
 		.then((data) => {
-			let locations = [];	
-			for(let loc of data) {
-				locations.push(new Location(loc.lat, loc.lon, loc.id, loc.name, loc.clue));
-			}
-			return locations;
+			return data.map((loc) => new Location (loc));
 		});
 	}
 
@@ -30,20 +27,14 @@ class GameState {
 				resolve(this.locations);
 			})
 			.then((locations) => {
-				return locations === null ? this.pullLocations() : locations;
+				return (locations === null)? this.pullLocations(): locations;
 			})
 			.then(locations => {
 				this.save(locations);
 				this.locations = locations;
-				return locations;
+				return;
 			});
-
-
-
-
-		
 	}
-
-
-
 }
+
+export {GameState, URL_ROOT};
