@@ -22,16 +22,16 @@ function calculate() {
 	let operation = form[1].value;
 
 	if(operation === '+') {
-		result.textContent = plus(x, y);
+		return plus(x, y);
 	}
 	if(operation === '-') {
-		result.textContent = minus(x, y);
+		return minus(x, y);
 	}
 	if(operation === '*') {
-		result.textContent = mult(x, y);
+		return mult(x, y);
 	}
 	if(operation === '/') {
-		result.textContent = div(x, y);
+		return div(x, y);
 	}
 }
 

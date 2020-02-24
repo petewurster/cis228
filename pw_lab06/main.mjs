@@ -7,7 +7,9 @@ function main() {
 		let form = document.getElementById('form').children;
 		let result = document.getElementById('result');
 		
-		document.getElementById('calculate').addEventListener('click', calculate);
+		document.getElementById('calculate').addEventListener('click', () => {
+			result.textContent = calculate();
+		});
 	});
 }
 
