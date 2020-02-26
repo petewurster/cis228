@@ -1,5 +1,6 @@
 'use strict';
-import {GameState, URL_ROOT} from './GameState.mjs';
+import {GameState} from './GameState.mjs';
+import * as C from './constants.mjs';
 
 document.addEventListener('DOMContentLoaded', main);
 
@@ -7,25 +8,22 @@ function buildList(location) {
 	location.forEach((loc) => {
 		let main = document.querySelector('main');
 		let newDiv = document.createElement('div');
+		newDiv.id = `div_${loc.id}`;
 		let h2 = document.createElement('h2');
 		let h2span = document.createElement('span');
-		let text = document.createTextNode('Clue:');
+		let text = document.createTextNode(`Clue: ${loc.clue}`);
 		h2.appendChild(h2span);
 		h2.appendChild(text);
 		text = document.createTextNode(String.fromCodePoint(0x2753));
 		h2span.appendChild(text);
+		h2span.id = `h2_span_${loc.id}`;
 		newDiv.appendChild(h2);
-		let p = document.createElement('p');
-		p.id = loc.id;
 		h2.id = `h2_${loc.id}`;
-		text = document.createTextNode('');
-		p.textContent = loc.clue;
-		newDiv.appendChild(p);
 
 		if(loc.isFound) {
 			h2span.textContent = String.fromCodePoint(0x2705);
-			p = document.createElement('p');
-			text = document.createTextNode(loc.name);
+			let p = document.createElement('p');
+			let text = document.createTextNode(loc.name);
 			p.appendChild(text);
 			newDiv.appendChild(p);
 			let innerDiv = document.createElement('div');
@@ -33,27 +31,25 @@ function buildList(location) {
 			innerDiv.appendChild(img);
 			newDiv.appendChild(innerDiv);
 		}
-		
 		main.appendChild(newDiv);
-
 
 	});
 
-	const fetchImage = (ref) => {
-		let loc = ref.firstChild.id.slice(3);
-		console.log(`${ref.tagName} div img`);
-		let img = document.querySelector(`${ref.tagName} div img`);
-		img.src = fetch(`${URL_ROOT}/${loc}.jpg`)
-				.then((response) => response.blob())
-				.then((blob) => img.src = URL.createObjectURL(blob));
-
-	}
-
+	
 	//this filter-map only applies event listener to "found" objects
-	Array.from(document.querySelectorAll('h2'))
-		.filter((elem) => location[elem.id.slice(4) - 1].isFound)
-		.map((elem) => fetchImage(elem.parentNode));
+	Array.from(document.querySelectorAll(`[id^='div_p']`))
+		.filter((elem) => location[elem.id.slice(5) - 1].isFound)
+		.map((elem) => fetchImage(elem));
 
+
+}
+
+const fetchImage = (ref) => {
+	let loc = ref.firstChild.id.slice(3);
+	let img = document.querySelector(`#${ref.id} div img`);
+	img.src = fetch(`${C.URL_ROOT}/${loc}.jpg`)
+			.then((response) => response.blob())
+			.then((blob) => img.src = URL.createObjectURL(blob));
 
 }
 

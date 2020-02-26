@@ -1,8 +1,8 @@
 'use strict';
 import {Location} from './Location.mjs';
-const URL_ROOT = 'https://petewurster.com/lab05';
+import * as C from './constants.mjs';
 
-class GameState {
+export class GameState {
 
 	constructor(locations) {
 		this.locations = locations;
@@ -10,7 +10,7 @@ class GameState {
 	}
 
 	pullLocations() {
-		return fetch(`${URL_ROOT}/locations.JSON`)
+		return fetch(`${C.URL_ROOT}/locations.JSON`)
 		.then((resp) => resp.json())
 		.then((data) => {
 			return data.map((loc) => new Location (loc));
@@ -36,5 +36,3 @@ class GameState {
 			});
 	}
 }
-
-export {GameState, URL_ROOT};

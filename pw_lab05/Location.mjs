@@ -1,6 +1,6 @@
 'use strict';
 
-class Location {
+export class Location {
 
 	constructor({lat, lon, id, name, clue}) {
 		this.name = name;
@@ -11,5 +11,3 @@ class Location {
 		this.id = id;
 	}
 }
-
-export {Location};
