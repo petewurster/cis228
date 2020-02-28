@@ -1,6 +1,5 @@
-'use strict';
-import {Location} from './Location.mjs';
 import * as C from './constants.mjs';
+import {Location} from './Location.mjs';
 
 export class GameState {
 

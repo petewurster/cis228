@@ -1,6 +1,0 @@
-		//////inside the buildlist function
-		// let p = document.createElement('p');
-		// p.id = loc.id;
-		// text = document.createTextNode('');
-		// p.textContent = loc.clue;
-		// newDiv.appendChild(p);

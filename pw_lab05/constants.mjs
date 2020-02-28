@@ -1,4 +1,7 @@
-'use strict';
+const URL_ROOT = 'https://petewurster.com/lab05';
+const DID = '<div><img></div>';
 
-export const URL_ROOT = 'https://petewurster.com/lab05';
-
+export {
+	URL_ROOT,
+	DID
+}
