@@ -4,5 +4,6 @@ const PRECISION = .004;
 
 export {
 	URL_ROOT,
-	DID
+	DID,
+	PRECISION
 }
