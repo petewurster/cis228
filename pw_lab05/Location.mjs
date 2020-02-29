@@ -4,8 +4,8 @@ export class Location {
 		this.name = name;
 		this.lat = lat;
 		this.lon = lon;
-		this.isFound = (Math.random() < .5)? false: true; 
 		this.clue = clue;
 		this.id = id;
+		this.isFound = false; 
 	}
 }

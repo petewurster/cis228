@@ -15,15 +15,14 @@ const updateElement = (ref, loc) => {
 	ref.innerHTML += (!loc.isFound? C.DID +
 		`<p>You have found ${loc.name}!</p>`: '');
 	ref.firstChild.firstChild.textContent = String.fromCodePoint(0x2705);
-	loc.isFound = true;
 }
 
 const fetchImage = (ref, loc) => {
 	let img = document.querySelector(`#${ref.id} div img`);
 	if (!img.src) {
 		fetch(`${C.URL_ROOT}/${loc.id}.jpg`)
-			.then((response) => response.blob())
-			.then((blob) => {img.src = URL.createObjectURL(blob)});
+		.then((response) => response.blob())
+		.then((blob) => {img.src = URL.createObjectURL(blob)});
 	}
 }
 
@@ -47,14 +46,23 @@ const distance = (lat1, lon1, lat2, lon2) => {
 	lat2 *= Math.PI / 180;
 	lon1 *= Math.PI / 180;
 	lon2 *= Math.PI / 180;
-	let h = Math.pow(Math.sin((lat2 - lat1) / 2), 2) + (Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin((lon2 - lon1) / 2), 2));
+	let h = (Math.sin((lat2 - lat1) / 2) ** 2) + (Math.cos(lat1) * Math.cos(lat2) * (Math.sin((lon2 - lon1) / 2) ** 2));
 	return 2 * r * Math.asin(Math.sqrt(h));
 }
 
+const updateGameWithHaversineSieveResults = (geo, game) => {
+	let foundLocation = game.locations.filter((loc) => distance(geo.coords.latitude, geo.coords.longitude, loc.lat, loc.lon) < .004)[0] || null;
+	if(!foundLocation) return;
+	let elem = document.querySelector(`#div_${foundLocation.id}`);
+	updateElement(elem, foundLocation);
+	fetchImage(elem, foundLocation);
+	foundLocation.isFound = true;
+	game.save(game.locations);
+	
+}
+
 export {
-	distance,
 	buildListElement,
-	fetchImage,
-	updateElement,
-	showFoundLocations
+	showFoundLocations,
+	updateGameWithHaversineSieveResults
 }

@@ -21,17 +21,17 @@ export class GameState {
 	}
 
 	load() {
-			return new Promise((resolve) => {
-				this.locations = JSON.parse(localStorage.getItem('game'));
-				resolve(this.locations);
-			})
-			.then((locations) => {
-				return (locations === null)? this.pullLocations(): locations;
-			})
-			.then(locations => {
-				this.save(locations);
-				this.locations = locations;
-				return;
-			});
+		return new Promise((resolve) => {
+			this.locations = JSON.parse(localStorage.getItem('game'));
+			resolve(this.locations);
+		})
+		.then((locations) => {
+			return (locations === null)? this.pullLocations(): locations;
+		})
+		.then(locations => {
+			this.save(locations);
+			this.locations = locations;
+			return;
+		});
 	}
 }
