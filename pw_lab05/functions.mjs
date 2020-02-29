@@ -51,7 +51,7 @@ const distance = (lat1, lon1, lat2, lon2) => {
 }
 
 const updateGameWithHaversineSieveResults = (geo, game) => {
-	let foundLocation = game.locations.filter((loc) => distance(geo.coords.latitude, geo.coords.longitude, loc.lat, loc.lon) < .004)[0] || null;
+	let foundLocation = game.locations.filter((loc) => distance(geo.coords.latitude, geo.coords.longitude, loc.lat, loc.lon) < C.PRECISION)[0] || null;
 	if(!foundLocation) return;
 
 	let elem = document.querySelector(`#div_${foundLocation.id}`);
@@ -59,7 +59,6 @@ const updateGameWithHaversineSieveResults = (geo, game) => {
 	fetchImage(elem, foundLocation);
 	foundLocation.isFound = true;
 	game.save(game.locations);
-	
 }
 
 export {
