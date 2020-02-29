@@ -6,7 +6,7 @@ const buildListElement = (loc) => {
 		`<div id="div_${loc.id}">` +
 			`<h2 id="h2_${loc.id}"><span id="h2_span_${loc.id}">` +
 				String.fromCodePoint(loc.isFound? 0x2705: 0x2753) +
-			`</span>Clue: ${loc.clue}</h2>` + (loc.isFound?	C.DID +
+			`</span>Clue: ${loc.clue}</h2>` + (loc.isFound? C.DID +
 			`<p>You have found ${loc.name}!</p>`: '') +
 		`</div>`;
 }
