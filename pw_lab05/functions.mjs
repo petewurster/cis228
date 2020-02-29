@@ -19,11 +19,12 @@ const updateElement = (ref, loc) => {
 
 const fetchImage = (ref, loc) => {
 	let img = document.querySelector(`#${ref.id} div img`);
-	if (!img.src) {
-		fetch(`${C.URL_ROOT}/${loc.id}.jpg`)
-		.then((response) => response.blob())
-		.then((blob) => {img.src = URL.createObjectURL(blob)});
-	}
+	
+	if(!img.src) return;
+
+	fetch(`${C.URL_ROOT}/${loc.id}.jpg`)
+	.then((response) => response.blob())
+	.then((blob) => {img.src = URL.createObjectURL(blob)});
 }
 
 const showFoundLocations = (game) => {
@@ -52,7 +53,9 @@ const distance = (lat1, lon1, lat2, lon2) => {
 
 const updateGameWithHaversineSieveResults = (geo, game) => {
 	let foundLocation = game.locations.filter((loc) => distance(geo.coords.latitude, geo.coords.longitude, loc.lat, loc.lon) < .004)[0] || null;
+	
 	if(!foundLocation) return;
+
 	let elem = document.querySelector(`#div_${foundLocation.id}`);
 	updateElement(elem, foundLocation);
 	fetchImage(elem, foundLocation);
