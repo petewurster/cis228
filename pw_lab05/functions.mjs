@@ -19,8 +19,7 @@ const updateElement = (ref, loc) => {
 
 const fetchImage = (ref, loc) => {
 	let img = document.querySelector(`#${ref.id} div img`);
-	if(img.src) return;
-	console.log(img.src);
+	if (img.src) return;
 
 	fetch(`${C.URL_ROOT}/${loc.id}.jpg`)
 	.then((response) => response.blob())
