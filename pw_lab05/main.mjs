@@ -7,8 +7,7 @@ import {buildListElement, showFoundLocations, updateGameWithHaversineSieveResult
 	.then(() => {
 		game.locations.map((loc) => buildListElement(loc));
 		showFoundLocations(game);
+		navigator.geolocation.watchPosition((geo) => updateGameWithHaversineSieveResults(geo, game));
 	});
 
-	navigator.geolocation.watchPosition((geo) => updateGameWithHaversineSieveResults(geo, game));
 })();
-

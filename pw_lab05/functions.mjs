@@ -19,7 +19,8 @@ const updateElement = (ref, loc) => {
 
 const fetchImage = (ref, loc) => {
 	let img = document.querySelector(`#${ref.id} div img`);
-	if(!img.src) return;
+	if(img.src) return;
+	console.log(img.src);
 
 	fetch(`${C.URL_ROOT}/${loc.id}.jpg`)
 	.then((response) => response.blob())
@@ -27,7 +28,6 @@ const fetchImage = (ref, loc) => {
 }
 
 const showFoundLocations = (game) => {
-	//filter-map fetches images of "found" locations
 	Array.from(document.querySelectorAll(`[id^='div_p']`))
 	.filter((elem) => {
 		let i = elem.id.slice(5) - 1;
@@ -51,6 +51,7 @@ const distance = (lat1, lon1, lat2, lon2) => {
 }
 
 const updateGameWithHaversineSieveResults = (geo, game) => {
+	//Haversine sieve via filter()
 	let foundLocation = game.locations.filter((loc) => distance(geo.coords.latitude, geo.coords.longitude, loc.lat, loc.lon) < C.PRECISION)[0] || null;
 	if(!foundLocation) return;
 
