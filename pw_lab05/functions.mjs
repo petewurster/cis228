@@ -7,7 +7,7 @@ const buildListElement = (loc) => {
 			`<h2 id="h2_${loc.id}"><span id="h2_span_${loc.id}">` +
 				String.fromCodePoint(loc.isFound? 0x2705: 0x2753) +
 			`</span>Clue: ${loc.clue}</h2>` + (loc.isFound? C.DID +
-			`<p>You have found ${loc.name}!</p>`: '') +
+			`<p>You have found the ${loc.name}!</p>`: '') +
 		`</div>`;
 }
 
@@ -27,7 +27,7 @@ const fetchImage = (ref, loc) => {
 }
 
 const showFoundLocations = (game) => {
-	Array.from(document.querySelectorAll(`[id^='div_p']`))
+	Array.from(document.querySelectorAll(C.DIVSELECTOR))
 	.filter((elem) => {
 		let i = elem.id.slice(5) - 1;
 		return game.locations[i].isFound;
@@ -51,14 +51,16 @@ const distance = (lat1, lon1, lat2, lon2) => {
 
 const updateGameWithHaversineSieveResults = (geo, game) => {
 	//Haversine sieve via filter()
-	let foundLocation = game.locations.filter((loc) => distance(geo.coords.latitude, geo.coords.longitude, loc.lat, loc.lon) < C.PRECISION)[0] || null;
+	let foundLocation = game.locations.filter((loc) => distance(geo.coords.latitude, geo.coords.longitude, loc.lat, loc.lon) < C.PRECISION) || null;
 	if(!foundLocation) return;
 
-	let elem = document.querySelector(`#div_${foundLocation.id}`);
-	updateElement(elem, foundLocation);
-	fetchImage(elem, foundLocation);
-	foundLocation.isFound = true;
-	game.save(game.locations);
+	foundLocation.map((foundLocation) => {
+		let elem = document.querySelector(`#div_${foundLocation.id}`);
+		updateElement(elem, foundLocation);
+		fetchImage(elem, foundLocation);
+		foundLocation.isFound = true;
+		game.save(game.locations);
+	});
 }
 
 export {

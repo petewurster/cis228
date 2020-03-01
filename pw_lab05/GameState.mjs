@@ -9,7 +9,7 @@ export class GameState {
 	}
 
 	pullLocations() {
-		return fetch(`${C.URL_ROOT}/locations.JSON`)
+		return fetch(`${C.URL_ROOT}/${C.J_SON}`)
 		.then((resp) => resp.json())
 		.then((data) => {
 			return data.map((loc) => new Location (loc));
