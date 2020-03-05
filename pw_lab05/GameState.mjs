@@ -5,7 +5,6 @@ export class GameState {
 
 	constructor(locations) {
 		this.locations = locations;
-		this.winConditionMet = false;
 	}
 
 	pullLocations() {
@@ -34,4 +33,5 @@ export class GameState {
 			return;
 		});
 	}
+	
 }

@@ -1,5 +1,12 @@
 import * as C from './constants.mjs';
 
+const enableResetButton = (game) => {
+	let main = document.querySelector('main');
+	main.innerHTML += C.MESSAGE;
+	Array.from(document.querySelectorAll('.complete button'))
+	.map((elem) => elem.addEventListener('click', () => reset(game)));
+}
+
 const buildListElement = (loc) => {
 	let main = document.querySelector('main');
 	main.innerHTML +=
@@ -38,6 +45,11 @@ const showFoundLocations = (game) => {
 	});
 }
 
+const isQuestComplete = (game) => {
+	let count = game.locations.filter((elem) => elem.isFound);
+	return count.length === game.locations.length;
+}
+
 //Haversine implementation provided c/o L. Liss
 const distance = (lat1, lon1, lat2, lon2) => {
 	const r = 6378.137;
@@ -51,20 +63,30 @@ const distance = (lat1, lon1, lat2, lon2) => {
 
 const updateGameWithHaversineSieveResults = (geo, game) => {
 	//Haversine sieve via filter()
-	let foundLocation = game.locations.filter((loc) => distance(geo.coords.latitude, geo.coords.longitude, loc.lat, loc.lon) < C.PRECISION) || null;
-	if(!foundLocation) return;
+	let foundLocations = game.locations.filter((loc) => distance(geo.coords.latitude, geo.coords.longitude, loc.lat, loc.lon) < C.PRECISION) || null;
+	if(!foundLocations) return;
 
-	foundLocation.map((foundLocation) => {
-		let elem = document.querySelector(`#div_${foundLocation.id}`);
-		updateElement(elem, foundLocation);
-		fetchImage(elem, foundLocation);
-		foundLocation.isFound = true;
+	foundLocations.map((foundLocations) => {
+		let elem = document.querySelector(`#div_${foundLocations.id}`);
+		updateElement(elem, foundLocations);
+		fetchImage(elem, foundLocations);
+		foundLocations.isFound = true;
 		game.save(game.locations);
 	});
+
+	if (isQuestComplete(game)) enableResetButton(game);
+}
+
+const reset = (game) => {
+	localStorage.setItem('game', null);
+	game.load();
+	location.reload();
 }
 
 export {
 	buildListElement,
 	showFoundLocations,
-	updateGameWithHaversineSieveResults
+	updateGameWithHaversineSieveResults,
+	enableResetButton,
+	isQuestComplete
 }
