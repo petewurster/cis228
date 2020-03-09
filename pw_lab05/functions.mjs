@@ -2,9 +2,13 @@ import * as C from './constants.mjs';
 
 const enableResetButton = (game) => {
 	let main = document.querySelector('main');
-	main.innerHTML += C.MESSAGE;
-	Array.from(document.querySelectorAll('.complete button'))
-	.map((elem) => elem.addEventListener('click', () => reset(game)));
+	main.innerHTML += C.ENDING;
+	document.querySelectorAll('.complete button')
+	.forEach((elem) => {
+		console.log(elem);
+		console.log(game);
+		elem.addEventListener('click', () => reset(game));
+});
 }
 
 const buildListElement = (loc) => {
@@ -46,7 +50,7 @@ const showFoundLocations = (game) => {
 }
 
 const isQuestComplete = (game) => {
-	let count = game.locations.filter((elem) => elem.isFound);
+	let count = game.locations.filter((loc) => loc.isFound);
 	return count.length === game.locations.length;
 }
 
@@ -66,18 +70,19 @@ const updateGameWithHaversineSieveResults = (geo, game) => {
 	let foundLocations = game.locations.filter((loc) => distance(geo.coords.latitude, geo.coords.longitude, loc.lat, loc.lon) < C.PRECISION) || null;
 	if(!foundLocations) return;
 
-	foundLocations.map((foundLocations) => {
-		let elem = document.querySelector(`#div_${foundLocations.id}`);
-		updateElement(elem, foundLocations);
-		fetchImage(elem, foundLocations);
-		foundLocations.isFound = true;
+	foundLocations.map((loc) => {
+		let elem = document.querySelector(`#div_${loc.id}`);
+		updateElement(elem, loc);
+		fetchImage(elem, loc);
+		loc.isFound = true;
 		game.save(game.locations);
 	});
 
-	if (isQuestComplete(game)) enableResetButton(game);
+	if(isQuestComplete(game)) enableResetButton(game);
 }
 
 const reset = (game) => {
+	alert('ressetting');
 	localStorage.setItem('game', null);
 	game.load();
 	location.reload();

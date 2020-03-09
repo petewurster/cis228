@@ -5,8 +5,7 @@ import {enableResetButton, buildListElement, showFoundLocations, isQuestComplete
 	let game = new GameState();	
 	game.load()
 	.then(() => {
-
-		if (isQuestComplete(game)) enableResetButton(game);
+		if(isQuestComplete(game)) enableResetButton(game);
 		
 		game.locations.map((loc) => buildListElement(loc));
 		showFoundLocations(game);
