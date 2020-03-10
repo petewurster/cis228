@@ -26,6 +26,7 @@ const updateElement = (ref, loc) => {
 const fetchImage = (ref, loc) => {
 	let img = document.querySelector(`#${ref.id} div img`);
 	if (img.src) { return }
+	img.alt = `picture of the ${loc.name}`;
 
 	fetch(`${C.URL_ROOT}/${loc.id}.jpg`)
 	.then((response) => response.blob())
@@ -45,8 +46,7 @@ const showFoundLocations = (game) => {
 }
 
 const isQuestComplete = (game) => {
-	let count = game.locations.filter((loc) => loc.isFound);
-	return count.length === game.locations.length;
+	return game.locations.reduce((acc, loc) => acc && loc.isFound);
 }
 
 //Haversine implementation provided c/o L. Liss
