@@ -8,7 +8,7 @@ const enableResetButton = (game) => {
 		console.log(elem);
 		console.log(game);
 		elem.addEventListener('click', () => reset(game));
-});
+	});
 }
 
 const buildListElement = (loc) => {
@@ -29,7 +29,9 @@ const updateElement = (ref, loc) => {
 }
 
 const fetchImage = (ref, loc) => {
+	console.log(ref)
 	let img = document.querySelector(`#${ref.id} div img`);
+	console.log(img);
 	if (img.src) return;
 
 	fetch(`${C.URL_ROOT}/${loc.id}.jpg`)
@@ -51,6 +53,8 @@ const showFoundLocations = (game) => {
 
 const isQuestComplete = (game) => {
 	let count = game.locations.filter((loc) => loc.isFound);
+	console.log(game);
+	console.log(count.length, game.locations.length);
 	return count.length === game.locations.length;
 }
 
@@ -67,7 +71,8 @@ const distance = (lat1, lon1, lat2, lon2) => {
 
 const updateGameWithHaversineSieveResults = (geo, game) => {
 	//Haversine sieve via filter()
-	let foundLocations = game.locations.filter((loc) => distance(geo.coords.latitude, geo.coords.longitude, loc.lat, loc.lon) < C.PRECISION) || null;
+	console.log(geo)
+	let foundLocations = game.locations.filter((loc) => distance(geo.coords.latitude, geo.coords.longitude, loc.lat, loc.lon) < C.PRECISION);
 	if(!foundLocations) return;
 
 	foundLocations.map((loc) => {
@@ -82,9 +87,10 @@ const updateGameWithHaversineSieveResults = (geo, game) => {
 }
 
 const reset = (game) => {
-	alert('ressetting');
-	localStorage.setItem('game', null);
-	game.load();
+	alert('resetting');
+	game.locations.map((loc) => loc.isFound = false);
+	console.log(game);
+	game.save(game.locations)
 	location.reload();
 }
 

@@ -6,7 +6,7 @@ const ENDING = `<div class="complete">` +
 					`<p>You have found everything for this hunt!</p>` +
 					`<button type="button">Reset</button>` +
 				`</div>`
-const PRECISION = .004;
+const PRECISION = 4000;
 
 export {
 	URL_ROOT,
