@@ -1,14 +1,9 @@
 import * as C from './constants.mjs';
 
 const enableResetButton = (game) => {
-	let main = document.querySelector('main');
-	main.innerHTML += C.ENDING;
-	document.querySelectorAll('.complete button')
-	.forEach((elem) => {
-		console.log(elem);
-		console.log(game);
-		elem.addEventListener('click', () => reset(game));
-	});
+	let banner = document.querySelector('#banner');
+	banner.innerHTML = C.ENDING;
+	document.querySelector('button').addEventListener('click', () => reset(game));
 }
 
 const buildListElement = (loc) => {
@@ -29,10 +24,8 @@ const updateElement = (ref, loc) => {
 }
 
 const fetchImage = (ref, loc) => {
-	console.log(ref)
 	let img = document.querySelector(`#${ref.id} div img`);
-	console.log(img);
-	if (img.src) return;
+	if (img.src) { return }
 
 	fetch(`${C.URL_ROOT}/${loc.id}.jpg`)
 	.then((response) => response.blob())
@@ -53,8 +46,6 @@ const showFoundLocations = (game) => {
 
 const isQuestComplete = (game) => {
 	let count = game.locations.filter((loc) => loc.isFound);
-	console.log(game);
-	console.log(count.length, game.locations.length);
 	return count.length === game.locations.length;
 }
 
@@ -71,26 +62,25 @@ const distance = (lat1, lon1, lat2, lon2) => {
 
 const updateGameWithHaversineSieveResults = (geo, game) => {
 	//Haversine sieve via filter()
-	console.log(geo)
 	let foundLocations = game.locations.filter((loc) => distance(geo.coords.latitude, geo.coords.longitude, loc.lat, loc.lon) < C.PRECISION);
-	if(!foundLocations) return;
+	if(!foundLocations) { return }
 
 	foundLocations.map((loc) => {
 		let elem = document.querySelector(`#div_${loc.id}`);
 		updateElement(elem, loc);
 		fetchImage(elem, loc);
 		loc.isFound = true;
-		game.save(game.locations);
 	});
+	
+	game.save(game.locations);
 
-	if(isQuestComplete(game)) enableResetButton(game);
+	if(isQuestComplete(game)) { enableResetButton(game) }
 }
 
 const reset = (game) => {
-	alert('resetting');
 	game.locations.map((loc) => loc.isFound = false);
-	console.log(game);
 	game.save(game.locations)
+	//reload the page now that local session is complete
 	location.reload();
 }
 

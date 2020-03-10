@@ -2,11 +2,8 @@ const URL_ROOT = 'https://petewurster.com/lab05';
 const J_SON = 'locations.JSON';
 const DID = '<div><img></div>';
 const DIVSELECTOR = `[id^='div_p']`;
-const ENDING = `<div class="complete">` +
-					`<p>You have found everything for this hunt!</p>` +
-					`<button type="button">Reset</button>` +
-				`</div>`
-const PRECISION = 4000;
+const ENDING = `<p>You have found everything for this hunt!</p><button type="button">Reset</button>`;
+const PRECISION = .004;
 
 export {
 	URL_ROOT,
