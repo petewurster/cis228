@@ -1,30 +1,35 @@
 [
 	{
-		"lat" : 39.960689,
-		"lon" : -75.168033,
+		"lat" : 39.96044587193453,
+		"lon" : -75.16843150049226,
 		"id" : "p1",
 		"name" : "CBI building",
 		"clue" : "This is my favorite place on campus..."
 	},
 	{
-		"lat" : 39.962229,
-		"lon" : -75.165985,
+		"lat" : 39.96204674690268,
+		"lon" : -75.16671756822117,
 		"id" : "p2",
 		"name" : "Veretan Resource Center",
 		"clue" : "These people helped me access my GI Bill benefits..."
 	},
 	{
-		"lat" : 39.962672,
-		"lon" : -75.166816,
+		"lat" : 39.960692009852224,
+		"lon" : -75.16660500853574,
 		"id" : "p3",
 		"name" : "school bookstore",
 		"clue" : "You can get course materials here..."
 	},
 	{
-		"lat" : 39.961434,
-		"lon" : -75.166655,
+		"lat" : 39.960545506328344,
+		"lon" : -75.16649331897496,
 		"id" : "p4",
 		"name" : "Halal food truck",
 		"clue" : "Get the most food for your $ from this place..."
 	}
 ]
+
+
+//39.960431
+//-75.168439
+

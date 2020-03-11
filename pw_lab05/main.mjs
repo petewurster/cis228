@@ -9,7 +9,7 @@ import {enableResetButton, buildListElement, showFoundLocations, isQuestComplete
 		
 		game.locations.map((loc) => buildListElement(loc));
 		showFoundLocations(game);
-		navigator.geolocation.watchPosition((geo) => updateGameWithHaversineSieveResults(geo, game));
+		navigator.geolocation.watchPosition((geo) => updateGameWithHaversineSieveResults(geo, game), () => {}, {enableHighAccuracy: true});
 	});
 
 })();
