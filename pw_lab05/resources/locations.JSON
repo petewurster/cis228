@@ -1,33 +1,5 @@
 [
 	{
-		"lat" : 39.9613358360156,
-		"lon" : -75.1667272579625,
-		"id" : "p5",
-		"name" : "Food truck in front of parking garage",
-		"clue" : "Food truck in front of parking garage"
-	},
-	{
-		"lat" : 39.9627607176453,
-		"lon" : -75.1677666977748,
-		"id" : "p6",
-		"name" : "Circle in walkway behind west building",
-		"clue" : "Circle in walkway behind west building"
-	},
-	{
-		"lat" : 39.9616674660146,
-		"lon" : -75.1686615497574,
-		"id" : "p7",
-		"name" : "Northeast stone in Baldwin Park",
-		"clue" : "Northeast stone in Baldwin Park"
-	},
-	{
-		"lat" : 39.9622224318236,
-		"lon" : -75.1661628206029,
-		"id" : "p8",
-		"name" : "Flagpole in front of Bonell by the tables",
-		"clue" : "Flagpole in front of Bonell by the tables"
-	},
-	{
 		"lat" : 39.96064529210529,
 		"lon" : -75.16808415442482,
 		"id" : "p1",
