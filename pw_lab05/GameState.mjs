@@ -11,7 +11,7 @@ export class GameState {
 		return fetch(`${C.URL_ROOT}/${C.J_SON}`)
 		.then((resp) => resp.json())
 		.then((data) => {
-			return data.map((loc) => new Location (loc));
+			return data.map((loc) => new Location (loc)).sort((a, b) => (a.id < b.id)? -1: 1);
 		});
 	}
 
