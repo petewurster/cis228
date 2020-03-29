@@ -1,0 +1,22 @@
+body{
+	background-color: #bbbbbb;
+	font-family: sans-serif;
+}
+
+.hidden{
+	display: none;
+}
+
+main{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+main > div{
+  width: 27%;
+  padding: 1px 15px;
+  margin: 10px;
+  background-color: #dedede;
+}
+
+

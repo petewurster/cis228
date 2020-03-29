@@ -1,0 +1,38 @@
+[
+	{
+		"name" : "High Life",
+		"brewery" : "Miller",
+		"abv" : 4.6,
+		"ibu" : 7,
+		"price" : 3,
+		"type" : "Lager",
+		"tags" : ["clean", "light", "crisp", "bubbly", "smooth"]
+	},
+	{
+		"name" : "Draught",
+		"brewery" : "Guinness",
+		"abv" : 4.2,
+		"ibu" : 40,
+		"price" : 5,
+		"type" : "Stout",
+		"tags" : ["rich", "creamy", "smooth", "dark", "nitro", "malty"]
+	},
+		{
+		"name" : "Breakfast Stout",
+		"brewery" : "Founders",
+		"abv" : 8.3,
+		"ibu" : 60,
+		"price" : 8.5,
+		"type" : "Stout",
+		"tags" : ["oatmeal", "coffee", "dark", "bitter", "smooth"]
+	},
+	{
+		"name" : "Foreign Extra",
+		"brewery" : "Guinness",
+		"abv" : 7.5,
+		"ibu" : 65,
+		"price" : 7,
+		"type" : "Stout",
+		"tags" : ["rich", "robust", "dark", "complex", "earthy"]
+	}
+]
