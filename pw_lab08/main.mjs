@@ -12,9 +12,15 @@ import {buildBeerElement} from './functions.mjs';
 			types: menu.listTypes()
 		}
 
-		beers.map(beer => {
-			buildBeerElement(beer, filters)
-		})
+		// filters.tags = [''];
+		// filters.types = [''];
+		// filters.brewers = [''];
+		console.log(filters)
+
+
+		let main = document.querySelector('main');
+		main.innerHTML = '';
+		beers.map(beer => buildBeerElement(beer, filters));
 		return beers;
 	})
 	.then(beers => {
