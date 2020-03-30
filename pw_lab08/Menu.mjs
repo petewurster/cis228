@@ -2,10 +2,11 @@ import * as C from './constants.mjs';
 import Beer from './Beer.mjs';
 
 class Menu {
-	#tags = new Set();
+	#tags = new Set('');
 	#beers = [];
-	#types = C.TYPES;
-	#brewers = C.BREWERS;
+	#types = new Set('');
+	#brewers = new Set('');
+	#filters = {};
 
 	constructor() {
 		this.#beers = fetch(`${C.URL_ROOT}/${C.J_SON}`)
@@ -13,7 +14,14 @@ class Menu {
 		.then((data) => {
 			data.map((obj) => {
 				obj.tags.map((tag) => this.#tags.add(tag));
+				this.#types.add(obj.type);
+				this.#brewers.add(obj.brewery)
 			});
+			this.#filters = {
+				tags: [... this.listTags()].sort(),
+				brewers: [... this.listBrewers()].sort(),
+				types: [... this.listTypes()].sort()
+			}
 			return data.map((obj) => new Beer(obj));
 		});
 	}
@@ -34,6 +42,21 @@ class Menu {
 		return this.#brewers;
 	}
 
+	get filters() {
+		return this.#filters;
+	}
+
+	set filtersBrewers() {
+
+	}
+
+	set filtersTags() {
+
+	}
+
+	set filtersTypes() {
+
+	}
 
 	
 }

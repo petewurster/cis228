@@ -6,21 +6,17 @@ import {buildBeerElement} from './functions.mjs';
 	menu.listBeers()
 	.then(beers => {
 		//filters initially set to include ALL possible items
-		let filters = {
-			tags: [... menu.listTags()].sort(),
-			brewers: menu.listBrewers(),
-			types: menu.listTypes()
-		}
 
-		// filters.tags = [''];
-		// filters.types = [''];
-		// filters.brewers = [''];
-		console.log(filters)
+		// menu.filters.tags = [''];
+		// menu.filters.types = [''];
+		// menu.filters.brewers = ['Miller'];
+		console.log(menu.listBrewers())
+		console.log(menu.filters)
 
 
 		let main = document.querySelector('main');
 		main.innerHTML = '';
-		beers.map(beer => buildBeerElement(beer, filters));
+		beers.map(beer => buildBeerElement(beer, menu.filters));
 		return beers;
 	})
 	.then(beers => {
