@@ -1,5 +1,5 @@
 import Menu from './Menu.mjs';
-import {buildBeerElement} from './functions.mjs';
+import {buildBeerElement, modFilters} from './functions.mjs';
 
 (() => {
 	let menu = new Menu();	
@@ -10,13 +10,13 @@ import {buildBeerElement} from './functions.mjs';
 		// menu.filters.tags = [''];
 		// menu.filters.types = [''];
 		// menu.filters.brewers = ['Miller'];
-		console.log(menu.listBrewers())
-		console.log(menu.filters)
-
+		// console.log(menu.listBrewers())
+		// console.log(menu.filters)
+		let selections = 9889;
 
 		let main = document.querySelector('main');
 		main.innerHTML = '';
-		beers.map(beer => buildBeerElement(beer, menu.filters));
+		beers.map(beer => buildBeerElement(beer, modFilters(menu.filters, selections)));
 		return beers;
 	})
 	.then(beers => {

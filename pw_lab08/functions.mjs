@@ -8,6 +8,11 @@ const buildBeerElement = (beer, filters) => {
 		`<p><b>${lines[0]}</b> ${lines[1]}<br>${lines[2]}<br><br>${lines[3]}</p></div>`;
 }
 
+const modFilters = (filters, selected) => {
+	console.log(filters, selected)
+	return filters;
+}
+
 const applyFilters = (beer, filters) => {
 	let arrayOfTests = [
 		beer.hasTag(filters.tags),
@@ -24,5 +29,6 @@ const applyFilters = (beer, filters) => {
 
 export {
 	buildBeerElement,
+	modFilters
 
 }

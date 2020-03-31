@@ -10,10 +10,10 @@ class Menu {
 
 	constructor() {
 		this.#beers = fetch(`${C.URL_ROOT}/${C.J_SON}`)
-		.then((resp) => resp.json())
-		.then((data) => {
+		.then(resp => resp.json())
+		.then(data => {
 			data.map((obj) => {
-				obj.tags.map((tag) => this.#tags.add(tag));
+				obj.tags.map(tag => this.#tags.add(tag));
 				this.#types.add(obj.type);
 				this.#brewers.add(obj.brewery)
 			});
@@ -22,7 +22,7 @@ class Menu {
 				brewers: [... this.listBrewers()].sort(),
 				types: [... this.listTypes()].sort()
 			}
-			return data.map((obj) => new Beer(obj));
+			return data.map(obj => new Beer(obj));
 		});
 	}
 
@@ -45,20 +45,6 @@ class Menu {
 	get filters() {
 		return this.#filters;
 	}
-
-	set filtersBrewers() {
-
-	}
-
-	set filtersTags() {
-
-	}
-
-	set filtersTypes() {
-
-	}
-
-	
 }
 
 export default Menu;
