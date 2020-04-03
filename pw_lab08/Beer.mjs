@@ -46,7 +46,7 @@ class Beer {
 	}
 
 	toString() {
-		return `${this.getBrewery()} ${this.getName()}\n` + `is a ${this.getType()} described as` +
+		return `${this.getBrewery()}: ${this.getName()}\n` + `is a ${this.getType()} described as` +
 			`${this.getTags().map(elem => ' ' + elem)}.\n` + 
 			` ${this.getName()} measures ${this.getAbv()}% ABV and ${this.getIbu()} IBUs.\n` +
 			` $${this.getPrice()}`;

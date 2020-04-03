@@ -45,6 +45,7 @@ class Menu {
 	get baseFilters() {
 		return this.#filters;
 	}
+
 }
 
 export default Menu;

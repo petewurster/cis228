@@ -4,7 +4,7 @@
 		"brewery" : "Miller",
 		"abv" : 4.6,
 		"ibu" : 7,
-		"price" : 3,
+		"price" : 4,
 		"type" : "Lager",
 		"tags" : ["clean", "light", "crisp", "bubbly", "smooth"]
 	},
@@ -15,7 +15,7 @@
 		"ibu" : 40,
 		"price" : 5,
 		"type" : "Stout",
-		"tags" : ["rich", "creamy", "smooth", "dark", "nitro", "malty"]
+		"tags" : ["rich", "creamy", "smooth", "dark", "malty"]
 	},
 		{
 		"name" : "Breakfast Stout",
@@ -24,7 +24,7 @@
 		"ibu" : 60,
 		"price" : 8.5,
 		"type" : "Stout",
-		"tags" : ["oatmeal", "coffee", "dark", "bitter", "smooth"]
+		"tags" : ["oatmeal", "coffee", "dark", "bitter"]
 	},
 	{
 		"name" : "Foreign Extra",
@@ -33,6 +33,87 @@
 		"ibu" : 65,
 		"price" : 7,
 		"type" : "Stout",
-		"tags" : ["rich", "robust", "dark", "complex", "earthy"]
+		"tags" : ["rich", "robust", "dark", "complex"]
+	},
+	{
+		"name" : "90 Minute IPA",
+		"brewery" : "Dogfish Head",
+		"abv" : 9,
+		"ibu" : 90,
+		"price" : 8,
+		"type" : "IPA",
+		"tags" : ["piney", "hoppy", "citrus", "bitter"]
+	},
+	{
+		"name" : "Palo Santo Marron",
+		"brewery" : "Dogfish Head",
+		"abv" : 12,
+		"ibu" : 50,
+		"price" : 9,
+		"type" : "Brown Ale",
+		"tags" : ["caramel", "woody", "earthy"]
+	},
+	{
+		"name" : "Newcastle Brown Ale",
+		"brewery" : "Lagunitas",
+		"abv" : 4.7,
+		"ibu" : 24,
+		"price" : 5,
+		"type" : "Brown Ale",
+		"tags" : ["smooth", "malty", "nutty"]
+	},
+	{
+		"name" : "Hibernation",
+		"brewery" : "Great Divide",
+		"abv" : 8.7,
+		"ibu" : 37,
+		"price" : 8,
+		"type" : "Ale",
+		"tags" : ["woody", "robust", "earthy"]
+	},
+	{
+		"name" : "Little Sumpin' Sumpin'",
+		"brewery" : "Lagunitas",
+		"abv" : 7.5,
+		"ibu" : 64,
+		"price" : 7,
+		"type" : "Ale",
+		"tags" : ["citrus", "piney", "complex", "floral"]
+	},
+	{
+		"name" : "Traditional Lager",
+		"brewery" : "Yuengling",
+		"abv" : 4.5,
+		"ibu" : 16,
+		"price" : 4,
+		"type" : "Lager",
+		"tags" : ["malty", "floral", "caramel"]
+	},
+	{
+		"name" : "IPA",
+		"brewery" : "Lagunitas",
+		"abv" : 6.2,
+		"ibu" : 51,
+		"price" : 7,
+		"type" : "IPA",
+		"tags" : ["hoppy", "citrus", "piney"]
+	},
+	{
+		"name" : "White",
+		"brewery" : "Allagash",
+		"abv" : 5,
+		"ibu" : 13,
+		"price" : 6,
+		"type" : "Witbier",
+		"tags" : ["peppery", "hazy", "spice", "crisp"]
+	},
+	{
+		"name" : "Tripel",
+		"brewery" : "Allagash",
+		"abv" : 9,
+		"ibu" : 18,
+		"price" : 8,
+		"type" : "Belgian",
+		"tags" : ["honey", "biscuit", "complex", "malty", "spice"]
 	}
 ]
