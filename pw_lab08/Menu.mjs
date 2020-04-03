@@ -42,7 +42,7 @@ class Menu {
 		return this.#brewers;
 	}
 
-	get filters() {
+	get baseFilters() {
 		return this.#filters;
 	}
 }
