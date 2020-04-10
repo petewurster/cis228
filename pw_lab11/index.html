@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link rel="icon" type="image/ico" href="./resources/hat2.png">
+	<script type="module" src="./data.mjs"></script>
+	<title>Pete Wurster</title>
+</head>
+
+<body>
+<main>
+<h1>Vue Lab</h1>
+
+<div id="app"></div>
+
+<script type="text/x-template" id="plate">
+	<div>
+		<button v-on:click="prev()">
+			<img v-bind:src="files[ (index === 0)? files.length - 1: index - 1 ]" alt="previous image">
+		</button>
+
+		<img v-bind:src="files[index]" id="current" alt="current image">
+
+		<button v-on:click="next()">
+			<img v-bind:src="files[ (index === files.length - 1)? 0: index + 1 ]" alt="next image">
+		</button>
+
+		<div><img v-bind:src="files[index]" id="big" alt="enlarged current image"></div>
+	</div>
+
+</script>
+</main>
+
+
+</body>
+</html>
