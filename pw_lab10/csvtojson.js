@@ -1,11 +1,6 @@
 const fs = require('fs').promises;
 const csv = process.argv[2];
 
-const display = (data) => {
-	console.log(`\nyour csv file has been converted to json format:` +
-		`\n\t${JSON.stringify(data)}\n\n`);
-}
-
 (() => {
 	fs.readFile(csv, 'utf-8')
 	//split data into multilevel array
@@ -22,10 +17,10 @@ const display = (data) => {
 			data.push(obj);
 		});
 
-		//strip out the row created with headers AS values from quick & dirty mapping
-		return data.filter(obj => Object.keys(obj)[0] !== Object.values(obj)[0]);
+		//strip out bad rows created from quick & dirty mapping
+		return data.filter(obj => Object.keys(obj)[0] !== Object.values(obj)[0] && Object.values(obj)[0] !== '');
 	})
-	.then(data => display(data))
-	.catch(err => console.log(`\nError: ${err.path} could not be read\n\n`))
+	.then(data => console.log(JSON.stringify(data)))
+	.catch(err => console.error(`\nError: ${err.path} could not be read\n`));
 
 })();
