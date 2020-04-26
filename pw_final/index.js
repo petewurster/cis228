@@ -1,5 +1,6 @@
 const APP_ROOT = require('express').static('app');
 const JSON_MODULE = require('express').json();
+
 const SURVEY_RESULTS = '/surveyData.json';
 const SURVEY_QUESTIONS = '/surveyQuestions.json';
 const SUBMIT = '/submit';
@@ -36,7 +37,7 @@ const valid = (data) => {
 }
 
 const isThisZipOnFile = (haystack, needle) => {
-	return Object.keys(haystack).includes(needle.id);
+	return Object.keys(haystack).includes(needle.getId());
 }
 
 const save = (data) => {
@@ -52,7 +53,7 @@ const processData = (bigData, dataSetObj) => {
 		bigData[dataSetObj.getId()].count = 1;
 	}else{
 		//calculate new average for entry
-		bigData[dataSetObj.id].answers = bigData[dataSetObj.getId()].answers
+		bigData[dataSetObj.getId()].answers = bigData[dataSetObj.getId()].answers
 			.map((ans, i) => (ans * bigData[dataSetObj.getId()].count + dataSetObj.getAnswers()[i]) / (bigData[dataSetObj.getId()].count + 1));
 		bigData[dataSetObj.getId()].count ++;
 	}

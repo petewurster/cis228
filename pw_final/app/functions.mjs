@@ -1,16 +1,16 @@
 import {OPTS, GOOGLE_KEY, GOOGLE_API, SUBMIT, SURVEY_QUESTIONS} from './constants.mjs';
 import DataObj from './DataObj.mjs';
 
-const saveAns = (ans) => {
+const saveAnswers = (ans) => {
 	//answers are indexed by question
-	let qn = ans.name.slice(4);
+	let qstn = ans.name.slice(4);
 	let answers = JSON.parse(localStorage.getItem('answers'));
 	
-	answers[qn] = OPTS.indexOf(ans.value);
+	answers[qstn] = OPTS.indexOf(ans.value);
 	localStorage.setItem('answers', JSON.stringify(answers));
 }
 
-const submitAns = () => {
+const submitAnswers = () => {
 	if(!verifiedComplete()) return;
 
 	fetch(SUBMIT, {
@@ -60,11 +60,11 @@ const displayQuestions = () => {
 	.then(resp => resp.json())
 	.then(data => data = JSON.parse(data))
 	.then(questions => {
-		questions.map((qn, i) => buildQuestionElement(qn, i));
+		questions.map((qstn, i) => buildQuestionElement(qstn, i));
 		
 		//enable answer tracking
 		Array.from(document.querySelectorAll('input[type="radio"]'))
-			.map(elem => elem.addEventListener('click', (e) => saveAns(e.target)));
+			.map(elem => elem.addEventListener('click', (e) => saveAnswers(e.target)));
 
 		//build empty localStorage as needed
 		let len = (Array.from(document.querySelectorAll('input[type="radio"]')).length / 5);
@@ -72,10 +72,10 @@ const displayQuestions = () => {
 	})
 }
 
-const buildQuestionElement = (qn, i) => {
+const buildQuestionElement = (qstn, i) => {
 	let main = document.querySelector('main');
 	let answers = JSON.parse(localStorage.getItem('answers')) || false;
-	let divStr = `<div class="question" id="qn_${i}"><p><b>${qn}</b></p>`;
+	let divStr = `<div class="question" id="qstn_${i}"><p><b>${qstn}</b></p>`;
 
 	//add options and apply saved selections
 	OPTS.map((opt, j) => divStr +=
@@ -86,5 +86,5 @@ const buildQuestionElement = (qn, i) => {
 export {
 	displayQuestions,
 	getZip,
-	submitAns
+	submitAnswers
 }
