@@ -1,4 +1,6 @@
-import {OPTS, GOOGLE_KEY, GOOGLE_API, SURVEY_QUESTIONS, SURVEY_RESULTS} from './constants.mjs';
+import {OPTS, GOOGLE_KEY, GOOGLE_API, SUBMIT, SURVEY_QUESTIONS} from './constants.mjs';
+import DataObj from './DataObj.mjs';
+
 
 const saveAns = (ans) => {
 	let len = (Array.from(document.querySelectorAll('input[type="radio"]')).length / 5);
@@ -9,6 +11,27 @@ const saveAns = (ans) => {
 	localStorage.setItem('answers', JSON.stringify(answers));
 }
 
+
+const submitAns = () => {
+	if(!verifiedComplete()) return;
+
+	fetch(SUBMIT, {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(new DataObj(zip.value))	
+	})
+	.then(resp => resp.json())
+	.then(data => showResults(data))
+};
+
+const showResults = (data) => {
+	console.log(new DataObj(zip.value))
+	console.log(data)
+}
+
 const getZip = (geo) => {
 	let loc = `${GOOGLE_API}latlng=${geo.coords.latitude},${geo.coords.longitude}&key=${GOOGLE_KEY}`;
 
@@ -16,15 +39,21 @@ const getZip = (geo) => {
 	.then(data => data.json())
 	.then(data => {
 		let zip = data.results[0].address_components[7].short_name;
-		let zipInput = document.querySelector('#zip');
-		let zipNote = document.querySelector('#zipNote');
-
+		
+		document.querySelector('#zipNote').textContent = '* auto-detected';
+		document.querySelector('#zip').value = zip;
 		localStorage.setItem('location', JSON.stringify(zip));
-		zipInput.value = zip;
-		zipNote.textContent = '* auto-detected';
 	});
-};
+}
 
+const verifiedComplete = () => {
+	let zip = document.querySelector('#zip').value;
+
+	localStorage.setItem('location', JSON.stringify(zip))
+
+	return !JSON.parse(localStorage.getItem('answers')).includes(null) &&
+		JSON.parse(localStorage.getItem('location')).match(/[0-9]{5}/);
+}
 
 const displayQuestions = () => {
 	fetch(SURVEY_QUESTIONS)
@@ -42,15 +71,12 @@ const displayQuestions = () => {
 const buildQuestionElement = (qn, i) => {
 	let main = document.querySelector('main');
 	let answers = JSON.parse(localStorage.getItem('answers')) || false;
-	let elemString = `<div class="question" id="qn_${i}"><p><b>${qn}</b></p>`;
+	let divStr = `<div class="question" id="qn_${i}"><p><b>${qn}</b></p>`;
 	
-	OPTS.map((opt, j) => elemString +=
-		`<input type="radio" ${answers[i] === j ? "checked" :""} name="ans_${i}" value="${OPTS[j]}"> ${opt}`);
+	OPTS.map((opt, j) => divStr +=
+		`<input type="radio" ${answers[i] === j ? "checked" :""} name="ans_${i}" required="true" value="${OPTS[j]}"> ${opt}`);
 	
-	main.innerHTML += elemString + '</div>'
-
-
-
+	main.innerHTML += divStr + '</div>'
 }
 
 
@@ -58,4 +84,5 @@ const buildQuestionElement = (qn, i) => {
 export {
 	displayQuestions,
 	getZip,
+	submitAns
 }
