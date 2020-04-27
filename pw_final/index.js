@@ -24,10 +24,14 @@ server.get(SURVEY_QUESTIONS, (req, resp) => {
 
 server.post(SUBMIT, (req, resp) => {
 	let clientData = new DataSetObj(req.body);
-	if(!valid(clientData)) return resp.json({"rejected" : "invalid data submission"});
+	if(!valid(clientData)) return resp.status(400).json({"rejected" : "invalid data submission"});
 
 	fs.readFile(`.${SURVEY_RESULTS}`, 'utf-8')
 	.then(file => JSON.parse(file))
+	.catch(() => {
+		console.log('error loading file, new json generated')
+		return {}
+	})
 	.then(bigData => processData(bigData, clientData))
 	.then(processedData => resp.json(processedData));
 });

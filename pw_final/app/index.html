@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 	<link rel="icon" type="image/ico" href="./hat2.png">
+	<script src="./Chart.min.js"></script>
 	<script type="module" src="./main.mjs"></script>
 	<title>Pete Wurster</title>
 </head>
@@ -19,8 +20,8 @@
 	<div>
 		<input type="text" id="zip" size="5" minlength="5" maxlength="5" placeholder="zip code"> <span id="zipNote"></span>
 	</div>
-
-	<canvas></canvas>
+	<div id="hook"></div>	<!-- <canvas id="radar"></canvas> -->
+		
 	<main></main>
 	<button type="button">Submit</button>
 

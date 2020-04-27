@@ -5,6 +5,14 @@ class DataObj {
 		this.id = document.querySelector('#zip').value;		
 	}
 
+	getId() {
+		return this.id;
+	}
+
+	getAnswers() {
+		return this.answers;
+	}
+
 }
 
 export default DataObj;
