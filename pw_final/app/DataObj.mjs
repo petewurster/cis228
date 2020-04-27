@@ -1,8 +1,8 @@
 class DataObj {
 
-	constructor(zip) {
+	constructor() {
 		this.answers = JSON.parse(localStorage.getItem('answers'));
-		this.id = zip;		
+		this.id = document.querySelector('#zip').value;		
 	}
 
 }

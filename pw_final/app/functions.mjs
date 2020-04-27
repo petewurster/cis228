@@ -19,7 +19,7 @@ const submitAnswers = () => {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(new DataObj(zip.value))	
+		body: JSON.stringify(new DataObj())
 	})
 	.then(resp => resp.json())
 	.then(data => showResults(data));
@@ -29,7 +29,7 @@ const showResults = (data) => {
 	if(data.rejected) return console.error(data);
 
 	////////display the results
-	// console.log(new DataObj(zip.value))
+	// console.log(new DataObj())
 	// console.log(data)
 }
 
@@ -51,8 +51,8 @@ const verifiedComplete = () => {
 	let zip = document.querySelector('#zip').value;
 
 	localStorage.setItem('location', JSON.stringify(zip));
-	return JSON.parse(localStorage.getItem('location')).match(/[0-9]{5}/) &&
-		!JSON.parse(localStorage.getItem('answers')).includes(null);
+	return !JSON.parse(localStorage.getItem('answers')).includes(null) &&
+		JSON.parse(localStorage.getItem('location')).match(/[0-9]{5}/);
 }
 
 const displayQuestions = () => {
