@@ -3,15 +3,34 @@ body{
 	font-family: sans-serif;
 }
 
-main{
-	width: 60%;
+#wrapper{
+	width:95%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-main div:nth-child(odd){
+main{
+	width: 54%;
+	border:ridge 3px #000000;
 	background-color: #888888;
+}
+
+main div:nth-child(even){
+	background-color: #bbbbbb;
 }
 
 #zipNote{
 	color: #ff0000;
 }
 
+canvas{
+	width:42%;
+	float:right;
+	background-color: #eeeeee;
+	border:ridge 3px #000000;
+	/*display:none;*/
+}
+
+h1{
+	text-align: center;
+}
