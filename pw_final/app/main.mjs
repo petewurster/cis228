@@ -1,4 +1,4 @@
-import {displayQuestions, getZip, submitAnswers} from './functions.mjs';
+import {displayQuestions, getZip, submitAnswers, resetSurvey} from './functions.mjs';
 
 (() => {
 	displayQuestions()
@@ -6,6 +6,9 @@ import {displayQuestions, getZip, submitAnswers} from './functions.mjs';
 	let zip = document.querySelector('#zip');
 	zip.value = JSON.parse(localStorage.getItem('location')) || navigator.geolocation.getCurrentPosition(getZip, () => {zip.value = null}, {enableHighAccuracy: true});
 
-	document.querySelector('button').addEventListener('click', submitAnswers);
+	document.querySelector('button').addEventListener('click', () => {
+		let action = document.querySelector('button').textContent === 'Submit'? submitAnswers: resetSurvey;
+		action()
+	});
 
 })();

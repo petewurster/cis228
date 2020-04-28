@@ -13,7 +13,7 @@ const displayQuestions = () => {
 			.map(elem => elem.addEventListener('click', (e) => saveAnswers(e.target)));
 
 		//build empty localStorage as needed
-		let len = (Array.from(document.querySelectorAll('input[type="radio"]')).length) / 5;
+		let len = (Array.from(document.querySelectorAll('input[type="radio"]')).length) / OPTS.length;
 		if(!localStorage.getItem('answers')) localStorage.setItem('answers', JSON.stringify(new Array(len).fill(null)));
 	})
 }
@@ -78,7 +78,7 @@ const verifiedComplete = () => {
 const showResults = (data) => {
 	if(data.rejected) return console.error(data);
 	
-	let len = (Array.from(document.querySelectorAll('input[type="radio"]')).length) / 5;
+	let len = (Array.from(document.querySelectorAll('input[type="radio"]')).length) / OPTS.length;
 	let labels = Array.from(new Array(len).keys())
 		.map((val, i) => 'Q ' + (i + 1));
 
@@ -129,10 +129,26 @@ const showResults = (data) => {
 		    ]
 		}
 	});
+	document.querySelector('button').textContent = 'Reset';
+}
+
+let resetSurvey = () => {
+	let len = (Array.from(document.querySelectorAll('input[type="radio"]')).length) / OPTS.length
+	
+	localStorage.setItem('answers', JSON.stringify(new Array(len).fill(null)));
+	localStorage.removeItem('location');
+	
+	Array.from(document.querySelectorAll('input[type="radio"]'))
+		.map(elem => elem.checked = false);
+	document.querySelector('#zip').value = null;
+	document.querySelector('#hook').innerHTML = '';
+	document.querySelector('#zipNote').innerHTML = '';
+	document.querySelector('button').textContent = 'Submit';
 }
 
 export {
 	displayQuestions,
 	getZip,
-	submitAnswers
+	submitAnswers,
+	resetSurvey
 }
