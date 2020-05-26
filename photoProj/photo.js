@@ -87,15 +87,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	      canvas.height = height;
 	      context.drawImage(video, 0, 0, width, height);
 	////////////////////////////////////////////////////////////////////////////////    
+		let fileName = 'testFile.png';
 	      let data = canvas.toDataURL('image/png');
 	      console.log(data)
 	      fetch('./petesPhotoSaver.php', {
 	      	method: "POST",
 	      	headers: {
 	      		'Accept' : 'application/json, text/html, text/plain',
-	      		'Content-Type' : 'application/json'
+	      		// 'Content-Type' : 'application/json'
 	      	},
-	      	body: JSON.stringify({"haha":"test"})
+	      	body: `{"data":"${data}", "fileName":"${fileName}"}`
 	      })
 	      .then((resp) => {
 	      	console.log(resp);
